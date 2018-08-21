@@ -1,0 +1,30 @@
+@import "~sass-prefix-mixins/scss/prefixes";
+
+body {
+  @include vp-box-sizing(border-box);
+  height: 100%;
+  margin: 0;
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100%;
+  z-index: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+.body {
+  @include vp-flexbox;
+  @include vp-flex-direction(column);
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  min-height: 0;
+}
+
+@import 'components/header';
+@import 'components/chat';
+@import 'components/answer';
