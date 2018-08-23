@@ -17,7 +17,10 @@ export class MyHttpService {
   }
 
   sendfile(data) {
-    return this.http.post(this.API_URL + 'upload.php', data, {headers: this._options})
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', null);
+    headers.set('Accept', "multipart/form-data");
+    return this.http.post(this.API_URL + 'upload.php', data, {headers: headers})
       .pipe(
         map((res: any) => {
           console.log(res)

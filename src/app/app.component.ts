@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {responseMessage} from "./messages";
-import {MyHttpService} from "./services/myHttpService";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {responseMessage} from './messages';
+import {MyHttpService} from './services/myHttpService';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChildren('messages') messages: QueryList<any>;
   @ViewChild('content') content: ElementRef;
 
-  formData = new FormData();
+  formData: FormData = new FormData();
 
   typeInput = 'text';
 
@@ -34,11 +34,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   files: any;
 
-  srcToImageButton = "/assets/images/btn.png";
+  srcToImageButton = '/assets/images/btn.png';
 
   user = {id: 1};
 
-  constructor(private formBuilder: FormBuilder, private myHttp: MyHttpService) {
+  constructor(private myHttp: MyHttpService) {
   }
 
   ngAfterViewInit() {
@@ -56,20 +56,18 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
     } catch (err) {
     }
-  };
+  }
 
   initForm() {
-    this.myFirstReactiveForm = this.formBuilder.group({
-      text: [null]
-    });
+    this.myFirstReactiveForm = new FormGroup({});
   }
 
   addPhoto(event) {
-    let target = event.target || event.srcElement;
+    const target = event.target || event.srcElement;
     this.files = target.files;
     console.log(this.files);
     if (this.files) {
-      let files: FileList = this.files;
+      const files: FileList = this.files;
       console.log(files);
       console.log(files[0]);
       this.formData.append('file', files[0]);
@@ -79,7 +77,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.myHttp.sendfile(this.formData)
         .subscribe((res) => {
           console.log(res);
-        })
+        });
     }
     this.response();
   }
@@ -87,15 +85,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   sendBitrix() {
     this.myHttp.sendBitrix(this.user)
       .subscribe((res) => {
-        console.log(res)
-      })
+        console.log(res);
+      });
   }
 
   addToMessage(text, index) {
     this.variantsButton[index].active = true;
     this.selectVariant = this.selectVariant + ',' + text;
-    console.log(this.selectVariant)
-  };
+    console.log(this.selectVariant);
+  }
 
   sendMessage(text) {
     console.log(text);
@@ -109,23 +107,23 @@ export class AppComponent implements OnInit, AfterViewInit {
   response() {
     if (this.currentMessage <= this.responseMessage.length) {
       this.marginChat = '15%';
-      let responseMessage = this.responseMessage[this.currentMessage - 1];
-      let text = responseMessage.text;
-      this.fieldToUser = responseMessage.field;
-      this.typeInput = responseMessage.type;
+      const responseMessageNew = this.responseMessage[this.currentMessage - 1];
+      const text = responseMessageNew.text;
+      this.fieldToUser = responseMessageNew.field;
+      this.typeInput = responseMessageNew.type;
       this.allMessage.push({text: text, from: 'bot'});
       this.currentMessage += 1;
       this.scrollToBottom();
       if (this.typeInput === 'single_button') {
-        this.variantsButton = responseMessage.variants;
+        this.variantsButton = responseMessageNew.variants;
         this.marginChat = '40%';
         console.log(this.variantsButton);
       } else if (this.typeInput === 'multi_button') {
-        this.variantsButton = responseMessage.variants;
+        this.variantsButton = responseMessageNew.variants;
         console.log(this.variantsButton);
       }
     } else {
-      let text = 'Ваша заявка отправлена на рассмотрение';
+      const text = 'Ваша заявка отправлена на рассмотрение';
       this.typeInput = 'Good';
       this.allMessage.push({text: text, from: 'bot'});
       this.scrollToBottom();
@@ -135,7 +133,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     const controls = this.myFirstReactiveForm.controls;
-    let text = this.myFirstReactiveForm.value.text;
+    const text = this.myFirstReactiveForm.value.text;
     if (this.myFirstReactiveForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
