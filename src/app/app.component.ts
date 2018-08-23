@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {responseMessage} from './messages';
-import {MyHttpService} from './services/myHttpService';
+import {ApiService} from './services/api-service';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   fieldToUser = '';
   files: any;
 
-  constructor(private myHttp: MyHttpService) {
+  constructor(private apiService: ApiService) {
   }
 
   ngAfterViewInit() {
@@ -59,16 +59,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   addPhoto(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
-    console.log(this.files);
     if (this.files) {
       const files: FileList = this.files;
-      console.log(files);
-      console.log(files[0]);
       this.formData.append('file', files[0]);
-      console.log(this.formData);
-
-      console.log(this.formData);
-      this.myHttp.sendfile(this.formData)
+      this.apiService.sendfile(this.formData)
         .subscribe((res) => {
           this.user['photo'] = 'https://' + res.url;
         });
@@ -77,9 +71,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   sendBitrix() {
-    this.myHttp.sendBitrix(this.user)
+    this.apiService.sendBitrix(this.user)
       .subscribe((res) => {
-        console.log(res);
+        alert(res);
       });
   }
 
@@ -89,7 +83,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   sendMessage(text) {
-    console.log(text);
     this.variantsButton = [];
     this.user[this.fieldToUser] = text;
     this.allMessage.push({text: text, from: 'user'});
@@ -120,10 +113,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (this.typeInput === 'single_button') {
       this.variantsButton = currentResponseMessage.variants;
       this.marginChat = '40%';
-      console.log(this.variantsButton);
     } else if (this.typeInput === 'multi_button') {
       this.variantsButton = currentResponseMessage.variants;
-      console.log(this.variantsButton);
     }
   }
 
@@ -138,6 +129,4 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.sendMessage(text);
     this.Form.reset();
   }
-
-
 }

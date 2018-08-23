@@ -7,7 +7,6 @@
   max-height: 500px;
   min-height: 0;
 
-
   &__file-form {
     @include vp-flexbox;
     @include vp-justify-content(space-between);

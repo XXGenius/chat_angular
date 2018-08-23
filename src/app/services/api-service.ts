@@ -4,12 +4,12 @@ import {map} from 'rxjs/internal/operators';
 
 
 @Injectable()
-export class MyHttpService {
+export class ApiService {
 
   API_URL = 'https://golaso.io/tools/chat/';
 
   _options = new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type': 'application/json'
   });
 
 
@@ -30,8 +30,8 @@ export class MyHttpService {
   sendBitrix(data) {
     return this.http.post(this.API_URL + 'bitrix.php', data, {headers: this._options})
       .pipe(
-        map((res) => {
-          console.log(res);
+        map((res: Object) => {
+          return res;
         }));
 
   }

@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {MyHttpService} from './services/myHttpService';
+import {ApiService} from './services/api-service';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import {MyHttpService} from './services/myHttpService';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [MyHttpService],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
