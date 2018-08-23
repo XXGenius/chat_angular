@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {responseMessage} from './messages';
 import {MyHttpService} from './services/myHttpService';
 
@@ -13,30 +13,22 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('content') content: ElementRef;
 
   formData: FormData = new FormData();
-
-  typeInput = 'text';
-
-  marginChat = '15%';
-
-  variantsButton = [];
-
-  currentMessage = 1;
-
-  responseMessage = [];
-
-  allMessage = [];
-
-  selectVariant = '';
-
-  fieldToUser = '';
-
-  myFirstReactiveForm: FormGroup;
-
-  files: any;
-
-  srcToImageButton = '/assets/images/btn.png';
+  Form: FormGroup;
 
   user = {id: 1};
+
+  variantsButton = [];
+  currentMessage = 1;
+  responseMessage = [];
+  allMessage = [];
+
+  typeInput = 'text';
+  marginChat = '15%';
+  srcToImageButton = '/assets/images/btn.png';
+
+  selectVariant = '';
+  fieldToUser = '';
+  files: any;
 
   constructor(private myHttp: MyHttpService) {
   }
@@ -59,7 +51,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   initForm() {
-    this.myFirstReactiveForm = new FormGroup({});
+    this.Form = new FormGroup({
+      text: new FormControl(''),
+    });
   }
 
   addPhoto(event) {
@@ -76,7 +70,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       console.log(this.formData);
       this.myHttp.sendfile(this.formData)
         .subscribe((res) => {
-          console.log(res);
+          this.user['photo'] = 'https://' + res.url;
         });
     }
     this.response();
@@ -91,8 +85,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   addToMessage(text, index) {
     this.variantsButton[index].active = true;
-    this.selectVariant = this.selectVariant + ',' + text;
-    console.log(this.selectVariant);
+    this.selectVariant = this.selectVariant + ', ' + text;
   }
 
   sendMessage(text) {
@@ -101,27 +94,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.user[this.fieldToUser] = text;
     this.allMessage.push({text: text, from: 'user'});
     this.response();
-    console.log(this.user);
   }
 
   response() {
     if (this.currentMessage <= this.responseMessage.length) {
       this.marginChat = '15%';
-      const responseMessageNew = this.responseMessage[this.currentMessage - 1];
-      const text = responseMessageNew.text;
-      this.fieldToUser = responseMessageNew.field;
-      this.typeInput = responseMessageNew.type;
-      this.allMessage.push({text: text, from: 'bot'});
+      const currentResponseMessage = this.responseMessage[this.currentMessage - 1];
+      const text = currentResponseMessage.text;
+      this.fieldToUser = currentResponseMessage.field;
+      this.typeInput = currentResponseMessage.type;
       this.currentMessage += 1;
+      this.allMessage.push({text: text, from: 'bot'});
       this.scrollToBottom();
-      if (this.typeInput === 'single_button') {
-        this.variantsButton = responseMessageNew.variants;
-        this.marginChat = '40%';
-        console.log(this.variantsButton);
-      } else if (this.typeInput === 'multi_button') {
-        this.variantsButton = responseMessageNew.variants;
-        console.log(this.variantsButton);
-      }
+      this.changeTypeInput(currentResponseMessage);
     } else {
       const text = 'Ваша заявка отправлена на рассмотрение';
       this.typeInput = 'Good';
@@ -131,17 +116,27 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
+  changeTypeInput(currentResponseMessage) {
+    if (this.typeInput === 'single_button') {
+      this.variantsButton = currentResponseMessage.variants;
+      this.marginChat = '40%';
+      console.log(this.variantsButton);
+    } else if (this.typeInput === 'multi_button') {
+      this.variantsButton = currentResponseMessage.variants;
+      console.log(this.variantsButton);
+    }
+  }
+
   onSubmit() {
-    const controls = this.myFirstReactiveForm.controls;
-    const text = this.myFirstReactiveForm.value.text;
-    if (this.myFirstReactiveForm.invalid) {
+    const controls = this.Form.controls;
+    const text = this.Form.value.text;
+    if (this.Form.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
     }
     this.sendMessage(text);
-    this.myFirstReactiveForm.reset();
-
+    this.Form.reset();
   }
 
 

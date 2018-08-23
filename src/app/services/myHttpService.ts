@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map} from "rxjs/internal/operators";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map} from 'rxjs/internal/operators';
 
 
 @Injectable()
@@ -17,13 +17,13 @@ export class MyHttpService {
   }
 
   sendfile(data) {
-    let headers = new HttpHeaders();
+    const headers = new HttpHeaders();
     headers.set('Content-Type', null);
-    headers.set('Accept', "multipart/form-data");
+    headers.set('Accept', 'multipart/form-data');
     return this.http.post(this.API_URL + 'upload.php', data, {headers: headers})
       .pipe(
         map((res: any) => {
-          console.log(res)
+          return res;
         }));
   }
 
@@ -31,8 +31,8 @@ export class MyHttpService {
     return this.http.post(this.API_URL + 'bitrix.php', data, {headers: this._options})
       .pipe(
         map((res) => {
-          console.log(res)
-        }))
+          console.log(res);
+        }));
 
   }
 
