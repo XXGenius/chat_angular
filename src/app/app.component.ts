@@ -3,6 +3,15 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {responseMessage} from './messages';
 import {ApiService} from './services/api-service';
 
+export enum EInputType {
+  unknown,
+  text,
+  file,
+  single_button,
+  multi_button,
+  Good
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,14 +31,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   responseMessage = [];
   allMessage = [];
 
-  typeInput = 'text';
+  typeInput: EInputType = EInputType.text;
   marginChat = '15%';
   srcToImageButton = '/assets/images/btn.png';
 
   selectVariant = '';
   fieldToUser = '';
   files: any;
-
+  EInputType = EInputType;
   constructor(private apiService: ApiService) {
   }
 
@@ -95,14 +104,14 @@ export class AppComponent implements OnInit, AfterViewInit {
       const currentResponseMessage = this.responseMessage[this.currentMessage - 1];
       const text = currentResponseMessage.text;
       this.fieldToUser = currentResponseMessage.field;
-      this.typeInput = currentResponseMessage.type;
+      this.typeInput = EInputType[currentResponseMessage.type as string];
       this.currentMessage += 1;
       this.allMessage.push({text: text, from: 'bot'});
       this.scrollToBottom();
       this.changeTypeInput(currentResponseMessage);
     } else {
       const text = 'Ваша заявка отправлена на рассмотрение';
-      this.typeInput = 'Good';
+      this.typeInput = EInputType.Good;
       this.allMessage.push({text: text, from: 'bot'});
       this.scrollToBottom();
       this.sendBitrix();
@@ -110,10 +119,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   changeTypeInput(currentResponseMessage) {
-    if (this.typeInput === 'single_button') {
+    if (this.typeInput === EInputType.single_button) {
       this.variantsButton = currentResponseMessage.variants;
       this.marginChat = '40%';
-    } else if (this.typeInput === 'multi_button') {
+    } else if (this.typeInput === EInputType.multi_button) {
       this.variantsButton = currentResponseMessage.variants;
     }
   }
