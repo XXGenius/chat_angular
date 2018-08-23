@@ -1,0 +1,36 @@
+import {Injectable} from "@angular/core";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map} from "rxjs/internal/operators";
+
+
+@Injectable()
+export class MyHttpService {
+
+  API_URL = 'https://golaso.io/tools/chat/';
+
+  _options = new HttpHeaders({
+    'Content-Type':  'application/json'
+  });
+
+
+  constructor(private http: HttpClient) {
+  }
+
+  sendfile(data) {
+    return this.http.post(this.API_URL + 'upload.php', data, {headers: this._options})
+      .pipe(
+        map((res: any) => {
+          console.log(res)
+        }));
+  }
+
+  sendBitrix(data) {
+    return this.http.post(this.API_URL + 'bitrix.php', data, {headers: this._options})
+      .pipe(
+        map((res) => {
+          console.log(res)
+        }))
+
+  }
+
+}

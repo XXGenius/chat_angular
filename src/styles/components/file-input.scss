@@ -1,19 +1,12 @@
-.answer {
+.file {
   @include vp-flexbox;
   @include vp-flex-direction(column);
   @include vp-box-shadow(0px -1px 3px 0px rgba(0, 0, 0, 0.25));
-  @include vp-flex-grow(1);
+  @include vp-flex-grow(0);
   width: 100%;
   max-height: 500px;
   min-height: 0;
 
-  &__header {
-    @include vp-flexbox;
-    @include vp-justify-content(space-between);
-    @include vp-align-items(center);
-    width: 100%;
-    min-height: 50px;
-  }
 
   &__file-form {
     @include vp-flexbox;

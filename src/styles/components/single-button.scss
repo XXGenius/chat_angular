@@ -1,0 +1,32 @@
+.single-button {
+  @include vp-flex-direction(column);
+  @include vp-box-shadow(0px -1px 3px 0px rgba(0, 0, 0, 0.25));
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-height: 140px;
+
+  &__list {
+    @include vp-flexbox;
+    @include vp-flex-direction(column);
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  &__item {
+    @include vp-flexbox;
+    @include vp-flex-grow(1);
+    min-height: min-content;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #f67b7b;
+    color: #f67b7b;
+    margin: 5px 15px;
+
+    &_active {
+      color: white;
+      background: #f67b7b;
+      font-weight: bold;
+    }
+  }
+}
