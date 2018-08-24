@@ -1,4 +1,4 @@
-export let responseMessage = [
+export const responseMessage = [
   {
     id: 1,
     type: 'text',

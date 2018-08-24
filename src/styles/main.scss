@@ -1,4 +1,8 @@
 @import "~sass-prefix-mixins/scss/prefixes";
+@font-face {
+  font-family: Roboto Condensed;
+  src: url(fonts/Roboto-Regular.ttf);
+}
 
 body {
   @include vp-box-sizing(border-box);
@@ -8,6 +12,7 @@ body {
   position: fixed !important;
   width: 100%;
   z-index: 1;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 a {

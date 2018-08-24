@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {responseMessage} from './messages';
-import {ApiService} from './services/api-service';
+import {ApiService} from './services/api.service';
 
 export enum EInputType {
   unknown,
