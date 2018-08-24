@@ -1,0 +1,48 @@
+<div class="body">
+  <div class="header">
+    <img src="/assets/images/logo.png" alt="" class="header__logo">
+    <div class="header__title">
+      <div class="header__title-row">Натуральная косметика</div>
+      <div class="header__title-row">из вьетнама, кореи, японии</div>
+    </div>
+  </div>
+  <div class="chat" #content [style.margin-bottom]="marginChat">
+    <div class="chat__message-block" *ngFor="let message of allMessage"   #messages>
+      <div *ngIf="message.from === 'bot'" class="chat__message">{{ message.text }}</div>
+      <div *ngIf="message.from === 'user'" class="chat__message chat__message_my">{{ message.text }}</div>
+    </div>
+  </div>
+  <div class="text" *ngIf="typeInput === EInputType.text">
+    <div  class="text__header" [formGroup]="Form">
+      <div class="text__input-block">
+        <input type="text" class="text__input" id="text" placeholder="Выберите сообщение" formControlName="text" (keyup.enter)="onSubmit()">
+      </div>
+      <img  [src]="srcToImageButton"  alt="" class="text__send-btn" (click)="onSubmit()">
+    </div>
+  </div>
+  <div class="file" *ngIf="typeInput === EInputType.file" >
+    <div  class="file__list-file-form">
+      <label class="file__input-file-block" for="photo" >Сделать фото
+        <input type="file" class="file__input-file" id="photo" (change)="addPhoto($event)">
+        <img src="/assets/images/camera.png" alt="" class="file__input-file-block-img">
+      </label>
+      <label class="file__input-file-block" for="file">Прикрепить фото
+        <input type="file" class="file__input-file" id="file" (change)="addPhoto($event)">
+        <img src="/assets/images/clip.png" alt=""  class="file__input-file-block-img">
+      </label>
+    </div>
+  </div>
+  <div class="single-button" *ngIf="typeInput === EInputType.single_button">
+    <div   class="single-button__list" >
+      <div class="single-button__item" *ngFor="let variant of variantsButton" (click)="sendMessage(variant.text)">{{ variant.text }}
+      </div>
+    </div>
+  </div>
+  <div class="answer" *ngIf="typeInput === EInputType.multi_button" >
+    <div  class="answer__list">
+      <div class="answer__item" *ngFor="let variant of variantsButton; let i = index" [class.answer__item_active]="variant.active" (click)="addToMessage(variant.text, i)">{{ variant.text }}
+      </div>
+      <div class="answer__item answer__item_active" (click)="sendMessage(selectVariant)">Отправить</div>
+    </div>
+  </div>
+</div>

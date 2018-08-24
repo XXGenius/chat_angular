@@ -3,7 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/internal/operators';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
 
   API_URL = 'https://golaso.io/tools/chat/';
