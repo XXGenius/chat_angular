@@ -9,13 +9,14 @@
   <div class="chat" #content [style.margin-bottom]="marginChat">
     <div class="chat__message-block" *ngFor="let message of allMessage"   #messages>
       <div *ngIf="message.from === 'bot'" class="chat__message">{{ message.text }}</div>
-      <div *ngIf="message.from === 'user'" class="chat__message chat__message_my">{{ message.text }}</div>
+      <div *ngIf="message.from === 'user' && message.type !== 'photo'" class="chat__message chat__message_my">{{ message.text }}</div>
+      <img *ngIf="message.type === 'photo'" class="chat__photo" src="{{photoUrl}}" alt="">
     </div>
   </div>
   <div class="text" *ngIf="typeInput === EInputType.text">
     <div  class="text__header" [formGroup]="Form">
       <div class="text__input-block">
-        <input type="text" class="text__input" id="text" placeholder="Выберите сообщение" formControlName="text" (keyup.enter)="onSubmit()">
+        <input type="text" class="text__input" id="text" placeholder="Выберите сообщение" formControlName="text" (keyup.enter)="onSubmit()" AUTOCOMPLETE="off">
       </div>
       <img  [src]="srcToImageButton"  alt="" class="text__send-btn" (click)="onSubmit()">
     </div>
@@ -40,7 +41,7 @@
   </div>
   <div class="answer" *ngIf="typeInput === EInputType.multi_button" >
     <div  class="answer__list">
-      <div class="answer__item" *ngFor="let variant of variantsButton; let i = index" [class.answer__item_active]="variant.active" (click)="addToMessage(variant.text, i)">{{ variant.text }}
+      <div class="answer__item" *ngFor="let variant of variantsButton; let i = index" [class.answer__item_active]="variant.active" (click)="addToMessage(variant, i)">{{ variant.text }}
       </div>
       <div class="answer__item answer__item_active" (click)="sendMessage(selectVariant)">Отправить</div>
     </div>

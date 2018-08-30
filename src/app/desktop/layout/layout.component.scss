@@ -1,0 +1,32 @@
+@import "~sass-prefix-mixins/scss/prefixes";
+.body{
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#fabdbd, #ffd5d5)!important;
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.body_chat {
+  @include vp-flexbox;
+  @include vp-flex-direction(column);
+  width: 30%;
+  height: 60%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  min-height: 0;
+  background: white;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+@import '../../../styles/components/desktop/header';
+@import '../../../styles/components/desktop/chat';
+@import '../../../styles/components/desktop/answer';
+@import '../../../styles/components/desktop/text-input';
+@import '../../../styles/components/desktop/single-button';
+@import '../../../styles/components/desktop/file-input';

@@ -17,7 +17,17 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   formData: FormData = new FormData();
   Form: FormGroup;
 
-  user = {id: 1};
+  user = {
+    id: 1,
+    photo: {},
+    skin_characteristics: [],
+    recommendations: []
+  };
+
+  deal = {
+    products: [],
+    comments: []
+  };
 
   variantsButton = [];
   currentMessage = 1;
@@ -27,12 +37,15 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   typeInput: EInputType = EInputType.text;
   marginChat = '15%';
   srcToImageButton = '/assets/images/btn.png';
+  photoUrl = '';
 
   selectVariant = '';
   fieldToUser = '';
   files: any;
   EInputType = EInputType;
+
   constructor(private apiService: ApiService) {
+    this.apiService.getBitrixToken().subscribe(res => console.log(res));
   }
 
   ngAfterViewInit() {
@@ -43,6 +56,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.responseMessage = responseMessage;
     this.initForm();
     this.response();
+    setTimeout(() => {
+      this.response();
+    }, 500);
   }
 
   scrollToBottom = () => {
@@ -66,10 +82,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       this.formData.append('file', files[0]);
       this.apiService.sendfile(this.formData)
         .subscribe((res) => {
-          this.user['photo'] = 'https://' + res.url;
+          this.photoUrl = 'https://' + res.url;
+          this.user.photo = 'https://' + res.url;
+          console.log(this.user);
+          this.apiService.addContact(this.user).subscribe(result => console.log(result));
+          this.allMessage.push({text: '', from: 'user', type: 'photo'});
+          this.response();
         });
     }
-    this.response();
   }
 
   sendBitrix() {
@@ -79,15 +99,34 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       });
   }
 
-  addToMessage(text, index) {
+  addToMessage(variant, index) {
     this.variantsButton[index].active = true;
-    this.selectVariant = this.selectVariant + ', ' + text;
+    if (variant.product) {
+      this.deal.products.push(variant.product);
+    }
+    console.log(this.deal);
+    this.selectVariant = this.selectVariant + ', ' + variant.text;
+  }
+
+  sendSingleButton(variant) {
+    console.log(variant);
+    if (variant.recommendation) {
+      this.user.recommendations.push(variant.recommendation);
+    }
+    if (variant.skin_characteristics) {
+      this.user.skin_characteristics.push(variant.skin_characteristics);
+    }
+    if (variant.product) {
+      this.deal.products.push(variant.product);
+    }
+    console.log(this.user);
+    this.sendMessage(variant.text);
   }
 
   sendMessage(text) {
     this.variantsButton = [];
     this.user[this.fieldToUser] = text;
-    this.allMessage.push({text: text, from: 'user'});
+    this.allMessage.push({text: text, from: 'user', type: 'text'});
     this.response();
   }
 
@@ -105,7 +144,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     } else {
       const text = 'Ваша заявка отправлена на рассмотрение';
       this.typeInput = EInputType.Good;
-      this.allMessage.push({text: text, from: 'bot'});
+      this.allMessage.push({text: text, from: 'bot', type: 'text'});
       this.scrollToBottom();
       this.sendBitrix();
     }

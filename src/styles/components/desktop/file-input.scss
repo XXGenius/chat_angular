@@ -1,0 +1,119 @@
+.file {
+  @include vp-flexbox;
+  @include vp-flex-direction(column);
+  @include vp-box-shadow(0px -1px 6px 0px rgba(0, 0, 0, 0.10));
+  @include vp-flex-grow(0);
+  width: 100%;
+  max-height: 500px;
+  min-height: 0;
+
+  &__file-form {
+    @include vp-flexbox;
+    @include vp-justify-content(space-between);
+    @include vp-align-items(center);
+    width: 100%;
+    min-height: 50px;
+  }
+
+  &__input-file-block {
+    @include vp-flexbox;
+  }
+
+  &__input-file-block {
+    @include vp-flexbox;
+    @include vp-flex-grow(1);
+    padding: 12px;
+    color: #f67b7b;
+    margin: 5px 15px;
+    flex-direction: row-reverse;
+  }
+
+  &__input-file-block-img {
+    width: 20px;
+    height: 20px;
+    padding-right: 10px;
+
+  }
+
+  &__input-file[type=file] {
+    display: none;
+  }
+
+  &__list-file-form {
+    display: inline-grid;
+    justify-content: center;
+
+  }
+
+  &__input-file {
+    border: none;
+    height: 40px;
+    padding-bottom: 15px;
+    padding-top: 26px;
+
+    &:focus {
+      outline: none !important;
+      border: 0;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: #aeaeae;
+      opacity: 1;
+    }
+  }
+
+  &__input-block {
+    @include vp-flexbox;
+    width: 100%;
+    padding-left: 15px;
+  }
+
+  &__input {
+    width: 100%;
+    border: none;
+    height: 40px;
+
+    &:focus {
+      outline: none !important;
+      border: 0;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: #aeaeae;
+      opacity: 1;
+    }
+  }
+
+  &__send-btn {
+    @include vp-flexbox;
+    width: 22px;
+    height: 22px;
+    margin: 0 20px;
+  }
+
+  &__list {
+    @include vp-flexbox;
+    @include vp-flex-direction(column);
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  &__item {
+    @include vp-flexbox;
+    @include vp-flex-grow(1);
+    min-height: min-content;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #f67b7b;
+    color: #f67b7b;
+    margin: 5px 15px;
+
+    &_active {
+      color: white;
+      background: #f67b7b;
+      font-weight: bold;
+    }
+  }
+}

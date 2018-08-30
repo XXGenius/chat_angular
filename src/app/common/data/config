@@ -1,0 +1,7 @@
+
+
+//запрос токена
+https://oauth.bitrix.info/oauth/token/?grant_type=authorization_code&client_id=local.5b83e4a58542f0.75374089&client_secret=UiKnhsSgIidjOBu5BGrwFb9yxApJwXpEX6wlPQLkkJpgPXRdFz&code=521d845b002b73d0002ae60e0000001500000393b0b504614be8f03d94775b68f4d853
+//запрос 30-секундного кода
+https://b24-nafnqn.bitrix24.ru/oauth/authorize/?client_id=local.5b83e4a58542f0.75374089&response_type=code
+
