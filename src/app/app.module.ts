@@ -8,6 +8,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {DeviceDetectorModule} from 'ngx-device-detector';
 import {DeviceGuardService} from './device-guard.service';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {DeviceGuardService} from './device-guard.service';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     DeviceDetectorModule.forRoot(),
   ],
   providers: [DeviceGuardService],

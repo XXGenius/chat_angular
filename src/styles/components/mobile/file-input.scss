@@ -12,7 +12,7 @@
     @include vp-justify-content(space-between);
     @include vp-align-items(center);
     width: 100%;
-    min-height: 50px;
+
   }
 
   &__input-file-block {
@@ -20,6 +20,8 @@
     width: 100%;
     padding-left: 15px;
     @include vp-align-items(center);
+    font-size: 14px;
+
   }
 
   &__input-file-block {

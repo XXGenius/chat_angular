@@ -4,11 +4,11 @@
     <img src="/assets/images/logo.png" alt="" class="header__logo">
     <div class="header__title">
       <div class="header__title-row">Натуральная косметика</div>
-      <div class="header__title-row">из вьетнама, кореи, японии</div>
+      <div class="header__title-row">из Вьетнама, Кореи, Японии</div>
     </div>
   </div>
-  <div class="chat" #content>
-    <div class="chat__message-block" *ngFor="let message of allMessage"   #messages>
+  <div class="chat" #content >
+    <div class="chat__message-block" *ngFor="let message of allMessage" [@list]  #messages>
       <div *ngIf="message.from === 'bot' " class="chat__message">{{ message.text }}</div>
       <div *ngIf="message.from === 'user' && message.type !== 'photo'" class="chat__message chat__message_my">{{ message.text }}</div>
       <img *ngIf="message.type === 'photo'" class="chat__photo" src="{{photoUrl}}" alt="">
@@ -17,7 +17,7 @@
   <div class="text" *ngIf="typeInput === EInputType.text">
     <div  class="text__header" [formGroup]="Form">
       <div class="text__input-block">
-        <input type="text" class="text__input" id="text" placeholder="Выберите сообщение" formControlName="text" (keyup.enter)="onSubmit()">
+        <input type="text" class="text__input" id="text" placeholder="Выберите сообщение" formControlName="text" (keyup.enter)="onSubmit()" AUTOCOMPLETE="off">
       </div>
       <img  [src]="srcToImageButton"  alt="" class="text__send-btn" (click)="onSubmit()">
     </div>
@@ -45,3 +45,4 @@
   </div>
 </div>
 </div>
+

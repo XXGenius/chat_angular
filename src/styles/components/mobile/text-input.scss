@@ -57,24 +57,7 @@
 
   }
 
-  &__input-file {
-    width: 100%;
-    border: none;
-    height: 40px;
-    padding-bottom: 15px;
-    padding-top: 26px;
 
-    &:focus {
-      outline: none !important;
-      border: 0;
-      box-shadow: none;
-    }
-
-    &::placeholder {
-      color: #aeaeae;
-      opacity: 1;
-    }
-  }
 
   &__input-block {
     @include vp-flexbox;
@@ -86,11 +69,13 @@
     width: 100%;
     border: none;
     height: 40px;
+    font-size: 16px;
 
     &:focus {
       outline: none !important;
       border: 0;
       box-shadow: none;
+      font-size: 16px;
     }
 
     &::placeholder {

@@ -2,8 +2,8 @@ export const responseMessage = [
   {
     id: 1,
     type: 'text',
-    text: 'Привет. Для подбора косметики мне нужно определить ваш тип кожи и её особенности. ' +
-    'Для этого вышлите свою фотографию и ответь на вопросы.',
+    text: 'Здравствуйте! Для подбора косметики мне нужно определить Ваш тип кожи и её особенности. ' +
+    'Для этого ответьте, пожалуйста, на несколько вопросов и вышлите свою фотографию.',
     field: 'hi'
   },
   {
@@ -28,7 +28,7 @@ export const responseMessage = [
   {
     id: 5,
     type: 'file',
-    text: 'Загрузите ваше фото.',
+    text: 'Загрузите ваше фото. (В хорошем качестве! Крупный план, без макияжа, при дневном свете)',
     field: 'photo'
   },
   {
@@ -81,14 +81,14 @@ export const responseMessage = [
       {
         text: 'к вечеру',
         skin_characteristics: 'комбинированный склонный к сухости',
-        product: '1DM1, 2PY5, 2PY6, 5PL1, 4MAS6 + 5PL2, 2PY1, 3TN1, 4MS1',
+        product: [ 37, 53, 55, 15, 33, 39, 17, 19, 35 ],
         comment: 'Допы номер 2',
         additional: false
       },
       {
         text: 'вообще нет жирного блеска',
         skin_characteristics: 'сухой тип кожи',
-        product: '1DM1, 2PY5, 2PY6, 5PL1, 4MAS6 + 5PL2, 2PY1, 3TN1, 4MS1',
+        product: [ 37, 53, 55, 15, 33, 39, 17, 19, 35 ],
         comment: 'Допы номер 2',
         additional: false
       }
@@ -101,15 +101,15 @@ export const responseMessage = [
     field: 'leather',
     variants: [
       {
-        text: 'да - жирный тип кожи',
+        text: 'Да',
         skin_characteristics: 'жирный тип кожи',
-        product: '1DM1, 2PY5, 2PY6, 5PL1, 4MAS6 + 5PL3, 2PY3, 3TN2, 4MSL5',
+        product: [37, 17, 55, 15, 33, 41, 9, 7, 29],
         comments: 'Допы номер 1'
       },
       {
-        text: 'нет - комбинированный',
+        text: 'Нет',
         skin_characteristics: 'комбинированный склонный к жирности',
-        product: '1DM1, 2PY5, 2PY6, 5PL1, 4MAS6 + 5PL3, 2PY3, 3TN2, 4MSL5',
+        product: [37, 17, 55, 15, 33, 41, 9, 7, 29],
         comments: 'Допы номер 1'
       }
     ]
@@ -157,127 +157,127 @@ export const responseMessage = [
   {
     id: 11,
     type: 'multi_button',
-    text: 'Основные проблемы? (отметить галочкой)',
+    text: 'Основные проблемы? (Отметить нужное)',
     field: 'main_problems',
     variants: [
       {
-        text: 'жирный блеск',
+        text: 'Жирный блеск',
         recommendation: 'Очищение должно быть мягкое, которое не пересушивает кожу.',
         skin_characteristics: '',
-        product: '',
+        product: [],
         active: false
       },
       {
-        text: 'расширенные поры',
+        text: 'Расширенные поры',
         recommendation: 'Сделайте курс альгинантные масок (сужают поры, выравнивают кожу, ' +
         'увлажняют и насыщает витаминами. выводят токсины, омолаживают кожу )',
         skin_characteristics: '',
         active: false
       },
       {
-        text: 'черные точки',
+        text: 'Черные точки',
         recommendation: '',
         skin_characteristics: '',
-        product: '4MS2',
+        product: [ 59 ],
         active: false
       },
       {
-        text: 'прыщи (частые высыпания, внутренние болючие долго созревающие прыщи)',
+        text: 'Прыщи (частые высыпания, внутренние болючие долго созревающие прыщи)',
         recommendation: '',
         skin_characteristics: '',
-        product: '4MAS1',
+        product: [ 45 ],
         active: false
       },
       {
-        text: 'прыщи (пару прыщиков в определенные дни месяца)',
+        text: 'Прыщи (пару прыщиков в определенные дни месяца)',
         recommendation: '',
         skin_characteristics: '',
-        product: '4MAS1',
+        product: [ 45 ],
         active: false
       },
       {
-        text: 'закрытые комедоны ( прыщи которые не воспаляются и никак не беспокоят, но чувствуются проводя по коже пальцами.' +
+        text: 'Закрытые комедоны ( прыщи которые не воспаляются и никак не беспокоят, но чувствуются проводя по коже пальцами.' +
         'Из-за этого кожа не ровная)',
         recommendation: 'Добавьте в список отшелушивающие средства (Пилинги, средства с фруктовыми кислотами и энзимами)',
         skin_characteristics: '',
-        product: '',
+        product: [],
         active: false
       },
       {
-        text: 'следы после выдавливания прыщей',
+        text: 'Следы после выдавливания прыщей',
         recommendation: '',
         skin_characteristics: '',
-        product: '',
+        product: [],
         active: false
       },
       {
-        text: 'купероз ( капилляры которые видно сквозь кожу)',
+        text: 'Купероз ( капилляры которые видно сквозь кожу)',
         recommendation: '',
         skin_characteristics: '',
-        product: '4MAS2',
+        product: [ 47 ],
         active: false
       },
       {
-        text: 'сухость и стянутость кожи',
+        text: 'Сухость и стянутость кожи',
         recommendation: '',
         skin_characteristics: '',
-        product: '4KR4',
+        product: [ 65 ],
         active: false
       },
       {
-        text: 'первые неглубокие морщины',
+        text: 'Первые неглубокие морщины',
         recommendation: '',
         skin_characteristics: '',
-        product: '4MAS2',
+        product: [ 47 ],
         active: false
       },
       {
         text: 'Глубокие морщины',
         recommendation: '',
         skin_characteristics: '',
-        product: '4MAS2, 6ESS2',
+        product: [47, 5],
         active: false
       },
       {
-        text: 'морщины вокруг глаз',
+        text: 'Морщины вокруг глаз',
         recommendation: '',
         skin_characteristics: '',
-        product: '',
+        product: [],
         active: false
       },
       {
-        text: 'пигментация',
+        text: 'Пигментация',
         recommendation: 'Обязательно использовать СПФ защиту и добавить в ' +
         'уход средства с содержанием витамина С (осветляет пигментацию и выравнивает цвет кожи)',
         skin_characteristics: '',
-        product: ' 4KR6, 4MAS2, 4MS3',
+        product: [ 13, 47, 63 ], // '4KR6(прверить!!!), 4MAS2, 4MS3',  //ToDO
         active: false
       },
       {
-        text: 'шелушения',
+        text: 'Шелушения',
         recommendation: '',
-        product: '',
+        product: [],
         active: false
       },
       {
-        text: 'после умывания или скраба кожа краснеет',
-        recommendation: '',
-        skin_characteristics: '',
-        product: '4MSL1',
-        active: false
-      },
-      {
-        text: 'синяки под глазами',
+        text: 'После умывания или скраба кожа краснеет',
         recommendation: '',
         skin_characteristics: '',
-        product: '6PCH1',
+        product: [ 21 ],
         active: false
       },
       {
-        text: 'морщины вокруг глаз',
+        text: 'Синяки под глазами',
         recommendation: '',
         skin_characteristics: '',
-        product: '4KR5',
+        product: [57],
+        active: false
+      },
+      {
+        text: 'Морщины вокруг глаз',
+        recommendation: '',
+        skin_characteristics: '',
+        product: [ 13 ],
         active: false
       }
     ]

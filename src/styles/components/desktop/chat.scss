@@ -24,9 +24,8 @@
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     background: #f2feff;
-    margin-left: 50%;
-    height: 300px;
-    width: 200px;
+    margin-left: 40%;
+    max-height: 350px;
   }
 
   &__message {
@@ -37,7 +36,7 @@
     border-bottom-left-radius: 10px;
     background: #fff2f2;
     padding: 12px;
-    margin-right: 40px;
+    margin-right: 40%;
 
     &_my {
       border-top-right-radius: 0;
@@ -45,7 +44,7 @@
       border-bottom-right-radius: 10px;
       border-bottom-left-radius: 10px;
       background: #f2feff;
-      margin-left: 40px;
+      margin-left: 40%;
       margin-right: 0;
     }
 
