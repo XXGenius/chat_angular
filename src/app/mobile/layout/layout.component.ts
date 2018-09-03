@@ -53,6 +53,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     comments: ''
   };
 
+  recommendations = [];
   variantsButton = [];
   currentMessage = 1;
   responseMessage = [];
@@ -147,34 +148,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     }
   }
 
-  back() {  // откат вопроса назад
+  back() {  // ToDo откат вопроса назад (добавить в обновлениях)
     this.currentMessage -= 2;
     this.response();
   }
 
   addToMessage(variant, index) {
     this.variantsButton[index].active = true;
-    if (variant.recommendation) {
-      this.user.recommendations.push(variant.recommendation);
-      if (this.deal.recommendations !== '') {
-        this.deal.recommendations = this.deal.recommendations + ', ' + variant.recommendation;
-      } else {
-        this.deal.recommendations = variant.recommendation;
-      }
-    }
-    if (variant.skin_characteristics) {
-      this.user.skin_characteristics.push(variant.skin_characteristics);
-      if (this.deal.skin_characteristics !== '') {
-        this.deal.skin_characteristics = this.deal.skin_characteristics + ', ' + variant.skin_characteristics;
-      } else {
-        this.deal.skin_characteristics = variant.skin_characteristics;
-      }
-    }
-    if (variant.product) {
-      for (let i = 0; i < variant.product.length; i++) {
-        this.allIdProducts.push(variant.product[i]);
-      }
-    }
+    this.addAtrubutToBitrix(variant);
     if (this.selectVariant !== '') {
       this.selectVariant = this.selectVariant + ', ' + variant.text;
     } else {
@@ -182,13 +163,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     }
   }
 
-  sendSingleButton(variant) {
+  addAtrubutToBitrix(variant) {
     if (variant.recommendation) {
       this.user.recommendations.push(variant.recommendation);
-      if (this.deal.recommendations !== '') {
-        this.deal.recommendations = this.deal.recommendations + ', ' + variant.recommendation;
-      } else {
-        this.deal.recommendations = variant.recommendation;
+      for (let i = 0; i < variant.recommendation.length; i++) {
+        this.recommendations.push(variant.recommendation[i]);
       }
     }
     if (variant.skin_characteristics) {
@@ -202,9 +181,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     if (variant.product) {
       for (let i = 0; i < variant.product.length; i++) {
         this.allIdProducts.push(variant.product[i]);
-
       }
     }
+  }
+
+  sendSingleButton(variant) {
+    this.addAtrubutToBitrix(variant);
     if (variant.hasOwnProperty('additional')) {
       if (!variant.additional) {
         this.currentMessage += 1;
@@ -214,10 +196,22 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   sendMessage(text) {
+    console.log(this.recommendations);
     this.variantsButton = [];
     this.user[this.fieldToUser] = text;
     if (this.currentMessage === 4) {
       this.apiService.addContact(this.user).subscribe(result => null);
+    }
+    if (this.currentMessage === 12) {
+      this.recommendations = this.unique(this.recommendations);
+      console.log(this.recommendations);
+      for (let i = 0; i < this.recommendations.length; i++) {
+        if (this.deal.recommendations === '') {
+          this.deal.recommendations = this.recommendations[i];
+        } else {
+          this.deal.recommendations = this.deal.recommendations + ', ' + this.recommendations[i];
+        }
+      }
     }
     this.allMessage.push({text: text, from: 'user', type: 'text'});
     setTimeout(() => {
@@ -241,8 +235,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       const products = this.unique(this.allIdProducts);
       this.getProducts(products);
       this.apiService.addDeal(this.deal, this.productsDeal).subscribe(res => null);
-      const text = 'Спасибо! Я подберу для Вас индивидуальную систему ухода и в течение 24 часов вышлю информацию в ' +
-        'WhatsApp или на электронную почту! Хорошего дня! ;)';
+      const text = 'Спасибо! Я подберу для Вас индивидуальную систему ухода и в течение 24 ' +
+        'часов вышлю информацию в WhatsApp или на электронную почту! Хорошего дня! ;)';
       this.typeInput = EInputType.Good;
       this.allMessage.push({text: text, from: 'bot', type: 'text'});
       this.scrollToBottom();

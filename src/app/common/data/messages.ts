@@ -9,19 +9,19 @@ export const responseMessage = [
   {
     id: 2,
     type: 'text',
-    text: 'Ваше имя:',
+    text: 'Ваше имя?',
     field: 'name'
   },
   {
     id: 3,
     type: 'text',
-    text: 'Ваш телефон',
+    text: 'Ваш телефон?',
     field: 'number'
   },
   {
     id: 4,
     type: 'text',
-    text: 'Ваш e-mail',
+    text: 'Ваш e-mail?',
     field: 'email'
 
   },
@@ -39,23 +39,23 @@ export const responseMessage = [
     variants: [
       {
         text: 'До 20',
-        recommendation: ''
+        recommendation: []
       },
       {
         text: '20-30',
-        recommendation: ''
+        recommendation: []
       },
       {
         text: '31-45',
-        recommendation: 'Антивозрастные компоненты (коллаген, гиалуроновая кислота, пептиды)'
+        recommendation: ['Антивозрастные компоненты (коллаген, гиалуроновая кислота, пептиды)']
       },
       {
         text: '46-55',
-        recommendation: 'Антивозрастные компоненты (коллаген, гиалуроновая кислота, пептиды)'
+        recommendation: ['Антивозрастные компоненты (коллаген, гиалуроновая кислота, пептиды)']
       },
       {
         text: '56+',
-        recommendation: 'Антивозрастные компоненты (коллаген, гиалуроновая кислота, пептиды)'
+        recommendation: ['Антивозрастные компоненты (коллаген, гиалуроновая кислота, пептиды)']
       }
     ]
   },
@@ -79,16 +79,16 @@ export const responseMessage = [
         additional: true
       },
       {
-        text: 'к вечеру',
+        text: 'К вечеру',
         skin_characteristics: 'комбинированный склонный к сухости',
-        product: [ 37, 53, 55, 15, 33, 39, 17, 19, 35 ],
+        product: [37, 53, 55, 15, 33, 39, 17, 19, 35],
         comment: 'Допы номер 2',
         additional: false
       },
       {
-        text: 'вообще нет жирного блеска',
+        text: 'Вообще нет жирного блеска',
         skin_characteristics: 'сухой тип кожи',
-        product: [ 37, 53, 55, 15, 33, 39, 17, 19, 35 ],
+        product: [37, 53, 55, 15, 33, 39, 17, 19, 35],
         comment: 'Допы номер 2',
         additional: false
       }
@@ -126,13 +126,13 @@ export const responseMessage = [
       },
       {
         text: ' Кожу немного стягивает и сушит',
-        recommendation: 'Сделайте акцент на увлажнении, добавив в уход увлажняющие' +
-        ' средства(тканевые маски, тонеры и лосьоны на основе гиалуроновой кислоты)'
+        recommendation: ['Сделайте акцент на увлажнении, добавив в уход увлажняющие' +
+        ' средства(тканевые маски, тонеры и лосьоны на основе гиалуроновой кислоты)']
       },
       {
         text: 'Сильно стягивает и сушит кожу, хочется сразу нанести жирный крем',
-        recommendation: 'Сделайте акцент на увлажнении, добавив в ' +
-        'уход увлажняющие средства (тканевые маски, тонеры и лосьоны на основе гиалуроновой кислоты) '
+        recommendation: ['Сделайте акцент на увлажнении, добавив в ' +
+        'уход увлажняющие средства (тканевые маски, тонеры и лосьоны на основе гиалуроновой кислоты) ']
       }
     ]
   },
@@ -149,7 +149,7 @@ export const responseMessage = [
       },
       {
         text: 'Кожа тусклая, с землистым оттенком, тон не ровный',
-        recommendation: 'отшелушивающие средства (Пилинги, средства с фруктовыми кислотами и энзимами)',
+        recommendation: ['Добавьте в список отшелушивающие средства (Пилинги, средства с фруктовыми кислотами и энзимами)'],
         skin_characteristics: 'Кожа тусклая, не хватает отшелушивания'
       }
     ]
@@ -162,122 +162,115 @@ export const responseMessage = [
     variants: [
       {
         text: 'Жирный блеск',
-        recommendation: 'Очищение должно быть мягкое, которое не пересушивает кожу.',
+        recommendation: ['Очищение должно быть мягкое, которое не пересушивает кожу.'],
         skin_characteristics: '',
         product: [],
         active: false
       },
       {
         text: 'Расширенные поры',
-        recommendation: 'Сделайте курс альгинантные масок (сужают поры, выравнивают кожу, ' +
-        'увлажняют и насыщает витаминами. выводят токсины, омолаживают кожу )',
+        recommendation: ['Сделайте курс альгинантные масок (сужают поры, выравнивают кожу, ' +
+        'увлажняют и насыщает витаминами. выводят токсины, омолаживают кожу )'],
         skin_characteristics: '',
         active: false
       },
       {
         text: 'Черные точки',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 59 ],
+        product: [59],
         active: false
       },
       {
         text: 'Прыщи (частые высыпания, внутренние болючие долго созревающие прыщи)',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 45 ],
+        product: [45],
         active: false
       },
       {
         text: 'Прыщи (пару прыщиков в определенные дни месяца)',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 45 ],
+        product: [45],
         active: false
       },
       {
         text: 'Закрытые комедоны ( прыщи которые не воспаляются и никак не беспокоят, но чувствуются проводя по коже пальцами.' +
         'Из-за этого кожа не ровная)',
-        recommendation: 'Добавьте в список отшелушивающие средства (Пилинги, средства с фруктовыми кислотами и энзимами)',
+        recommendation: ['Добавьте в список отшелушивающие средства (Пилинги, средства с фруктовыми кислотами и энзимами)'],
         skin_characteristics: '',
         product: [],
         active: false
       },
       {
         text: 'Следы после выдавливания прыщей',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
         product: [],
         active: false
       },
       {
         text: 'Купероз ( капилляры которые видно сквозь кожу)',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 47 ],
+        product: [47],
         active: false
       },
       {
         text: 'Сухость и стянутость кожи',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 65 ],
+        product: [65],
         active: false
       },
       {
         text: 'Первые неглубокие морщины',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 47 ],
+        product: [47],
         active: false
       },
       {
         text: 'Глубокие морщины',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
         product: [47, 5],
         active: false
       },
       {
-        text: 'Морщины вокруг глаз',
-        recommendation: '',
-        skin_characteristics: '',
-        product: [],
-        active: false
-      },
-      {
         text: 'Пигментация',
-        recommendation: 'Обязательно использовать СПФ защиту и добавить в ' +
-        'уход средства с содержанием витамина С (осветляет пигментацию и выравнивает цвет кожи)',
+        recommendation: ['Обязательно использовать СПФ защиту и добавить в ' +
+        'уход средства с содержанием витамина С (осветляет пигментацию и выравнивает цвет кожи)'],
         skin_characteristics: '',
-        product: [ 13, 47, 63 ], // '4KR6(прверить!!!), 4MAS2, 4MS3',  //ToDO
+        product: [13, 47, 63], // '4KR6(прверить!!!), 4MAS2, 4MS3',  //ToDO
         active: false
       },
       {
         text: 'Шелушения',
-        recommendation: '',
+        recommendation: [],
         product: [],
         active: false
       },
       {
         text: 'После умывания или скраба кожа краснеет',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 21 ],
+        product: [21],
         active: false
       },
       {
         text: 'Синяки под глазами',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
         product: [57],
         active: false
       },
       {
         text: 'Морщины вокруг глаз',
-        recommendation: '',
+        recommendation: [],
         skin_characteristics: '',
-        product: [ 13 ],
+        product: [13],
         active: false
       }
     ]
