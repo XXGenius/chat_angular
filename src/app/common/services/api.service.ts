@@ -11,9 +11,9 @@ export class ApiService {
   BITRIX_URL = 'https://b24-nafnqn.bitrix24.ru/rest/';
   API_URL = 'https://golaso.io/tools/chat/';
 
-  AUTH_TOKEN = 'c981845b002b73d0002ae60e00000015000003b45e947d38bf58956b571ee0b0b95e33';
+  AUTH_TOKEN = '89f2905b002bf2d6002ae60e00000001000003cca073925f6ab6d8066d0ce4af6cb0eb';
 
-  REFRESH_TOKEN = 'a100ac5b002b73d0002ae60e000000150000038bccb014ab23bf391715542a9480dca8';
+  REFRESH_TOKEN = '7971b85b002bf2d6002ae60e000000010000039a2e0bc52b1496869afea8fe163f4d06';
 
   user_id = '';
   deal_id = '';
@@ -63,10 +63,9 @@ export class ApiService {
           TITLE: 'Плановая продажа',
           TYPE_ID: 'GOODS',
           STAGE_ID: 'NEW',
-          COMPANY_ID: 5,
           CONTACT_ID: this.user_id,
           OPENED: 'Y',
-          ASSIGNED_BY_ID: 1,
+          ASSIGNED_BY_ID: '1',
           PROBABILITY: 30,
           CURRENCY_ID: 'RUB',
           OPPORTUNITY: 0,
@@ -97,12 +96,27 @@ export class ApiService {
           SOURCE_ID: 'SELF',
           UF_CRM_1535731326: user.email,
           PHONE: [{VALUE: user.number, VALUE_TYPE: 'WORK'}],
-
+          PHOTO: {fileData: ''},
           UF_CRM_1535654556: user.photo, // фото
           UF_CRM_1535731528: user.age  // возраст
         }
     };
     return this.http.post(this.BITRIX_URL + 'crm.contact.update?scope=&auth=' + this.AUTH_TOKEN, data, {headers: this._options})
+      .pipe(
+        map((res) => {
+          return res;
+        }));
+  }
+
+  uploadPhoto() {
+    const data = [{
+      id: 1,
+      data: {
+        NAME: '2511.jpg'
+      },
+      fileContent: document.getElementById('file')
+    }];
+    return this.http.post(this.BITRIX_URL + 'disk.storage.uploadfile?scope=&auth=' + this.AUTH_TOKEN, data, {headers: this._options})
       .pipe(
         map((res) => {
           return res;
@@ -141,6 +155,7 @@ export class ApiService {
           OPENED: 'Y',
           TYPE_ID: 'CLIENT',
           SOURCE_ID: 'SELF',
+          ASSIGNED_BY_ID: '1',
           PHONE: [{VALUE: user.number, VALUE_TYPE: 'WORK'}],
           UF_CRM_1535643245: '', // список рекомендаций
           UF_CRM_1535643591: '',  // Характеристики кожи

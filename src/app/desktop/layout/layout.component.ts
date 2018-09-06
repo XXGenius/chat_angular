@@ -132,9 +132,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   addPhoto(event) {
     const target = event.target || event.srcElement;
     this.files = target.files;
+    this.apiService.uploadPhoto().subscribe(res => console.log(res));
     if (this.files) {
       const files: FileList = this.files;
       this.formData.append('file', files[0]);
+      console.log(this.files);
       this.apiService.sendfile(this.formData)
         .subscribe((res) => {
           this.photoUrl = 'https://' + res.url;
@@ -143,7 +145,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
           this.allMessage.push({text: '', from: 'user', type: 'photo'});
           setTimeout(() => {
             this.response();
-          }, 2000);
+          }, 500);
         });
     }
   }

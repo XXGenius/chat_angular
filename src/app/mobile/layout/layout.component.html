@@ -10,7 +10,7 @@
     <div class="chat__message-block" *ngFor="let message of allMessage" [@list]  #messages>
       <div *ngIf="message.from === 'bot'" class="chat__message">{{ message.text }}</div>
       <div *ngIf="message.from === 'user' && message.type !== 'photo'" class="chat__message chat__message_my">{{ message.text }}</div>
-      <img *ngIf="message.type === 'photo'" class="chat__photo" src="{{photoUrl}}" alt="">
+      <img *ngIf="message.type === 'photo'" id="photo" class="chat__photo" src="{{photoUrl}}" alt="">
     </div>
   </div>
   <div class="text" *ngIf="typeInput === EInputType.text">
